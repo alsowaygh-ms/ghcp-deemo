@@ -12,6 +12,17 @@ in a modern browser. No installation or local server is required.
 You can add tasks, mark them complete, and delete them. Tasks are stored only
 in memory, so they reset when the page is refreshed.
 
+## Container deployment
+
+This app can be served in a container with the included Dockerfile.
+
+```sh
+docker build -t ghcp-deemo .
+docker run --rm -p 8080:80 ghcp-deemo
+```
+
+Then open http://localhost:8080 in a browser.
+
 ## Project structure
 
 ```text
