@@ -3,9 +3,25 @@ const taskInput = document.querySelector("#task-input");
 const taskList = document.querySelector("#task-list");
 const emptyState = document.querySelector("#empty-state");
 const taskCount = document.querySelector("#task-count");
+const themeToggle = document.querySelector("#theme-toggle");
 
 let tasks = [];
 let nextTaskId = 1;
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.classList.toggle("dark", isDark);
+  themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+  localStorage.setItem("task-tracker-theme", theme);
+}
+
+function initializeTheme() {
+  const savedTheme = localStorage.getItem("task-tracker-theme");
+  const preferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(savedTheme || (preferredDark ? "dark" : "light"));
+}
 
 function addTask(text) {
   const trimmedText = text.trim();
@@ -86,4 +102,10 @@ taskForm.addEventListener("submit", (event) => {
 
 taskInput.addEventListener("input", () => taskInput.setCustomValidity(""));
 
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.classList.contains("dark") ? "light" : "dark";
+  applyTheme(nextTheme);
+});
+
+initializeTheme();
 renderTasks();

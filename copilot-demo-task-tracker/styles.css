@@ -5,6 +5,28 @@
   --accent: #17654b;
   --muted: #626d68;
   --border: #ced7d2;
+  --surface: #ffffff;
+  --surface-alt: #f5f7f6;
+  --page-bg: #f5f7f6;
+  --grid-line: #e6ece8;
+  --button-hover: #104c38;
+  --delete-button-bg: #f9e7ea;
+  --delete-button-text: #a33240;
+}
+
+:root.dark {
+  color: #edf2f1;
+  background: #101716;
+  --accent: #65d9b3;
+  --muted: #a7b6b1;
+  --border: #2f3d3b;
+  --surface: #17211f;
+  --surface-alt: #101716;
+  --page-bg: #101716;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --button-hover: #4ac198;
+  --delete-button-bg: rgba(255, 255, 255, 0.04);
+  --delete-button-text: #f4a1af;
 }
 
 * {
@@ -15,8 +37,10 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-image: linear-gradient(#e6ece8 1px, transparent 1px);
+  background: var(--page-bg);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px);
   background-size: 100% 40px;
+  color: inherit;
 }
 
 main {
@@ -24,10 +48,25 @@ main {
   margin: 64px auto;
 }
 
+.top-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .eyebrow {
   color: var(--accent);
   font-size: 12px;
   font-weight: bold;
+}
+
+.theme-toggle {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: inherit;
 }
 
 h1 {
@@ -52,7 +91,8 @@ input[type="text"] {
   border: 1px solid var(--border);
   border-radius: 4px;
   font: inherit;
-  background: white;
+  background: var(--surface);
+  color: inherit;
 }
 
 button {
@@ -69,7 +109,7 @@ button {
 }
 
 button:hover {
-  background: #104c38;
+  background: var(--button-hover);
 }
 
 :focus-visible {
@@ -148,14 +188,14 @@ ul {
 }
 
 .delete-button {
-  color: #a33240;
+  color: var(--delete-button-text);
   background: transparent;
   font-size: 14px;
   padding: 8px;
 }
 
 .delete-button:hover {
-  background: #f9e7ea;
+  background: var(--delete-button-bg);
 }
 
 @media (max-width: 480px) {
